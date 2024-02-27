@@ -6,11 +6,34 @@ Use the === operator, or something equivalent such as indexOf, to determine whet
 Give the class a static from method that takes an iterable object as argument and creates a group that contains all the values produced by iterating over it.
 */
 
-class Group {
-    // Your code here.
-  }
-  
 
+class Group {
+  constructor() {
+    this.members = [];
+  }
+
+  add(value) {
+    if (!this.has(value)) {
+      this.members.push(value);
+    }
+  }
+
+  delete(value) {
+    this.members = this.members.filter(v => v !== value);
+  }
+
+  has(value) {
+    return this.members.includes(value);
+  }
+
+  static from(collection) {
+    let group = new Group;
+    for (let value of collection) {
+      group.add(value);
+    }
+    return group;
+  }
+}
   // Tests:
   let group = Group.from([10, 20]);
   console.log(group.has(10));
